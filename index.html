@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Van Rental Calculator</title>
+  <link rel="icon" href="assets/icon.png">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" type="text/css" href="assets/style.css">
+</head>
+<body>
+
+<h2>Van Rental Price Calculator</h2>
+<div id="map"></div>
+
+<!-- Inputs -->
+<div>
+  <label>Pickup Location</label>
+  <input type="text" id="pickupSearch" placeholder="Search pickup...">
+  <div id="pickupSuggestions"></div>
+  <small style="color:green" id="pickupLabel"></small>
+</div>
+
+<div>
+  <label>Drop-off Location</label>
+  <input type="text" id="dropoffSearch" placeholder="Search drop-off...">
+  <div id="dropoffSuggestions"></div>
+  <small style="color:red" id="dropoffLabel"></small>
+</div>
+
+
+<input type="hidden" id="distanceInput" readonly>
+<div>
+<label>Start Date & Time</label>
+<input type="datetime-local" id="startTime">
+</div>
+
+<div>
+<label>End Date & Time</label>
+<input type="datetime-local" id="endTime">
+</div>
+
+<div>
+<label>Category</label>
+<select id="category">
+  <option value="regular">Regular</option>
+  <option value="budget">Budget-Friendly</option>
+</select>
+</div>
+
+<div>
+<label>Vehicle Type</label>
+<select id="vehicle">
+  <option value="l300" selected>L300</option>
+  <option value="jeep">Jeep</option>
+  <option value="van">Van</option>
+</select>
+</div>
+
+
+
+<input type="hidden" id="totalPrice" readonly>
+
+<button type="button" onclick="resetMap()">Reset</button>
+
+<p id="distance">Distance: 0 km</p>
+<p id="priceDisplay">Price: ₱0.00</p>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="assets/map.js"></script>
+
+
+</body>
+</html>
