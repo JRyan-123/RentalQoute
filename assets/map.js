@@ -171,4 +171,29 @@ map.on('click', async function (e) {
     placeMarker(!pickupMarker ? "pickup" : "dropoff", e.latlng, name);
   }
 });
-   
+
+function captureAndChat() {
+  const btn = event.target;
+  btn.disabled = true;
+  btn.innerText = "Preparing...";
+  
+  html2canvas(document.getElementById("summaryBox")).then(canvas => {
+    const link = document.createElement('a');
+    link.download = 'rental_summary.png';
+    link.href = canvas.toDataURL();
+    link.click();
+
+    btn.disabled = false;
+    btn.innerText = "📸 Finalize & Message Us";
+
+    window.open('https://m.me/TriarRental', '_blank');
+    alert("📸 Screenshot downloaded. You can now send it to us in Messenger.");
+  });
+}
+function changePickup() {
+  if (pickupMarker) map.removeLayer(pickupMarker);
+  pickupMarker = null;
+  document.getElementById("pickupSearch").value = "";
+  document.getElementById("pickupSearch").disabled = false;
+  document.getElementById("pickupLabel").innerText = "";
+}

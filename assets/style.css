@@ -10,6 +10,15 @@ body{
     margin: auto; 
     background: #ebffeb;
 }
+.summaryBox{
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    max-width: 500px;
+    margin: auto;
+    background: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
 #map { 
 
     height: 400px; 
@@ -43,7 +52,20 @@ button {
     margin-top: 10px; 
     border: none; 
     border-radius: 5px; 
-    cursor: pointer; }
-button[type=button] { 
-    background-color: #f44336; 
-    color: white; }
+    cursor: pointer; 
+}
+button[type=button] {  
+    color: white; 
+}
+#capture{
+    background: #4CAF50;
+}
+#capture:hover{
+    background: green;
+}
+#reset{
+    background:#f44336;
+}
+#reset:hover{
+    background:#f22516;
+}
