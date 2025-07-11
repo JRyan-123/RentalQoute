@@ -165,12 +165,21 @@ function resetMap() {
   document.getElementById(id).addEventListener("input", calculateTotalPrice);
 });
 
-map.on('click', async function (e) {
+map.on('click', function (e) {
   if (!pickupMarker || !dropoffMarker) {
-    const name = await reverseGeocode(e.latlng.lat, e.latlng.lng);
-    placeMarker(!pickupMarker ? "pickup" : "dropoff", e.latlng, name);
+    const type = !pickupMarker ? "pickup" : "dropoff";
+    const defaultName = type === "pickup" ? "Pickup Point" : "Drop-off Point";
+
+    // Place marker immediately with temporary label
+    placeMarker(type, e.latlng, defaultName);
+
+    // Do reverse geocode in background
+    reverseGeocode(e.latlng.lat, e.latlng.lng).then(realName => {
+      updateMarkerPopup(type, realName);
+    });
   }
 });
+
 
 function handleFinalize() {
   const button = event.target;
@@ -202,10 +211,27 @@ function handleFinalize() {
   });
 }
 
-function changePickup() {
-  if (pickupMarker) map.removeLayer(pickupMarker);
-  pickupMarker = null;
-  document.getElementById("pickupSearch").value = "";
-  document.getElementById("pickupSearch").disabled = false;
-  document.getElementById("pickupLabel").innerText = "";
+
+if (!(navigator.userAgent.includes("FBAN") || navigator.userAgent.includes("FBAV"))) {
+  document.getElementById("browserNotice").style.display = "none";
+}
+
+function updateMarkerPopup(type, realName) {
+  if (type === "pickup" && pickupMarker) {
+    pickupMarker.setPopupContent("Pickup: " + realName).openPopup();
+    document.getElementById("pickupLabel").innerText = realName;
+    document.getElementById("pickupSearch").value = realName;
+  } else if (type === "dropoff" && dropoffMarker) {
+    dropoffMarker.setPopupContent("Drop-off: " + realName).openPopup();
+    document.getElementById("dropoffLabel").innerText = realName;
+    document.getElementById("dropoffSearch").value = realName;
+  }
+
+  // Re-run distance calculation if both are ready
+  if (pickupMarker && dropoffMarker) {
+    console.time("Distance calculation");
+    calculateDistance(pickupMarker.getLatLng(), dropoffMarker.getLatLng()).then(() => {
+      console.timeEnd("Distance calculation");
+    });
+  }
 }
