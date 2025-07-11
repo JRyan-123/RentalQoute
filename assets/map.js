@@ -172,24 +172,36 @@ map.on('click', async function (e) {
   }
 });
 
-function captureAndChat() {
-  const btn = event.target;
-  btn.disabled = true;
-  btn.innerText = "Preparing...";
-  
+function handleFinalize() {
+  const button = event.target;
+  button.disabled = true;
+  button.innerText = "Preparing...";
+
   html2canvas(document.getElementById("summaryBox")).then(canvas => {
+    // Trigger image download
     const link = document.createElement('a');
     link.download = 'rental_summary.png';
-    link.href = canvas.toDataURL();
+    link.href = canvas.toDataURL('image/png');
+    document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
 
-    btn.disabled = false;
-    btn.innerText = "📸 Finalize & Message Us";
+    // Re-enable button
+    button.disabled = false;
+    button.innerText = "📸 Finalize & Message Us";
 
-   alert("📸 Screenshot downloaded. You can now send it to us in Messenger.");
-    // Messenger link is now handled by the anchor tag
+    // Use timeout to give download a moment before redirect
+    setTimeout(() => {
+      window.location.href = 'https://m.me/TriarRental';
+    }, 1000);
+  }).catch(err => {
+    alert("❌ Screenshot failed. Try again.");
+    console.error(err);
+    button.disabled = false;
+    button.innerText = "📸 Finalize & Message Us";
   });
 }
+
 function changePickup() {
   if (pickupMarker) map.removeLayer(pickupMarker);
   pickupMarker = null;
