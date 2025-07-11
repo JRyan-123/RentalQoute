@@ -64,8 +64,9 @@
 <input type="hidden" id="totalPrice" readonly>
 
 <button type="button" onclick="resetMap()" id="reset">  🗘 Reset</button>
-  <button type="button" onclick="captureAndChat()" id="capture">📸 Finalize & Message Us</button>
-
+<a id="finalizeLink" href="https://m.me/TriarRental" target="_blank" rel="noopener noreferrer">
+  <button type="button" id="capture" onclick="captureAndPrepare()">📸 Finalize & Message Us</button>
+</a>
 
 <p id="distance">Distance: 0 km</p>
 <p id="priceDisplay">Price: ₱0.00</p>

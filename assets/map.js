@@ -186,8 +186,8 @@ function captureAndChat() {
     btn.disabled = false;
     btn.innerText = "📸 Finalize & Message Us";
 
-    window.open('https://m.me/TriarRental', '_blank');
-    alert("📸 Screenshot downloaded. You can now send it to us in Messenger.");
+   alert("📸 Screenshot downloaded. You can now send it to us in Messenger.");
+    // Messenger link is now handled by the anchor tag
   });
 }
 function changePickup() {
