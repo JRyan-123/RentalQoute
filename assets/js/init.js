@@ -56,3 +56,22 @@ function enableChange(type) {
 }
 enableChange("pickup");
 enableChange("dropoff");
+
+
+document.getElementById("serviceType").addEventListener("change", () => {
+  const service = document.getElementById("serviceType").value;
+  const endInputWrapper = document.getElementById("endTime").closest(".input-wrapper");
+  const startInputWrapper = document.getElementById("startTime");
+
+  if (service === "hakot") {
+    endInputWrapper.style.display = "none";
+    startInputWrapper.style.width = "47.5%";
+
+  } else {
+    endInputWrapper.style.display = "";
+    startInputWrapper.style.width = "95%";
+
+  }
+
+  calculateTotalPrice(); // recalculate after switching
+});

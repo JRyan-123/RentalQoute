@@ -24,10 +24,20 @@
 
 <div id="map"></div>
 <div class="menu">
-<h2 id="title"><img src="assets/icon-nobg1.png" alt="" id="icon-nobg"> Rental-Qoute</h2>
+<div class="row">
+  <div class="input-wrapper">
+      <h2 id="title"><img src="assets/icon-nobg1.png" alt="" id="icon-nobg"> Rental-Qoute</h2>
+  </div>
 
+<div class="input-wrapper">
+<label>Service type</label>
+<select id="serviceType">
+  <option value="point">Point-to-point</option>
+  <option value="hakot">Hakot-Gamit </option>
+</select>
+</div>
+</div>
 
-  
 
 <!-- Inputs -->
 <div class="row">
@@ -60,36 +70,39 @@
 
 </div>
 <small id="timeError" style="color: red; display: none;"></small>
-<!-- <div>
-<label>Category</label>
-<select id="category">
-  <option value="regular">Regular</option>
-  <option value="budget">Budget-Friendly</option>
-</select>
-</div> -->
 
-<div>
-<!-- <label>Vehicle Type</label> -->
-<select id="vehicle" hidden>
+<div class="row">
+
+
+<div class="input-wrapper">
+<label>Vehicle Type</label>
+<select id="vehicle">
   <option value="l300" selected>L300</option>
   <option value="jeep" disabled>Jeep</option>
   <option value="van" disabled>Van</option>
 </select>
 </div>
 
+<div class="input-wrapper">
+<label>Passengers</label>
+<input type="number" id="numberPassenger">
+</div>
+</div>
+  
+
 
 
 <input type="hidden" id="totalPrice" readonly>
-
+<input type="hidden" id="totalPriceB" readonly>
 
 <div class="row">
 <p id="distance">Distance: 0 km</p>
 <p id="durationDisplay">Duration: 0 hours</p>
-<p id="priceDisplay">Price: ₱0.00</p>
+<p id="priceDisplay">Price: ₱0.00 </p>
 </div>
 <div class="btn-row">
   
-  <button id="messengerBtn">📲 Send to Messenger</button>
+  <button id="messengerBtn">📲 Send via Messenger</button>
 </div>
 
 </div>
