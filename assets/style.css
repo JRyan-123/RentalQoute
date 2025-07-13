@@ -148,6 +148,10 @@ h2{
   #startTime, #endTime{
         font-size: var(--sz-xxs);
     }
+#priceDisplay{
+    font-style: italic;
+    border-bottom: 1px solid var(--clr-grn);
+}
 /*responsive*/
 
 @media (min-width: 475px){
