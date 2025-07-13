@@ -2,79 +2,101 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Van Rental Calculator</title>
   <link rel="icon" href="assets/icon.png">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
   <link rel="stylesheet" type="text/css" href="assets/style.css">
+  <link rel="stylesheet" href="assets/utils.css">
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 
-<h2>Van Rental Price Calculator</h2>
+  
+
 <div id="map"></div>
-<div id="summaryBox">
+<div class="menu">
+<h2 id="title"><img src="" alt="" id="icon-nobg"> Rental-Qoute</h2>
+
+
   
 
 <!-- Inputs -->
-<div>
-  <label>Pickup Location</label>
-  <input type="text" id="pickupSearch" placeholder="Search pickup...">
-  <div id="pickupSuggestions"></div>
-  <small style="color:green" id="pickupLabel"></small>
+<div class="row">
+<div class="input-wrapper">
+  <label>Pickup Location : <small style="color:green" id="pickupLabel"></small></label>
+  <input type="text" id="pickupSearch" placeholder="Search pickup..." autocomplete="off">
+  <div id="pickupSuggestions" class="suggestion-box"></div>
+  
 </div>
 
-<div>
-  <label>Drop-off Location</label>
-  <input type="text" id="dropoffSearch" placeholder="Search drop-off...">
-  <div id="dropoffSuggestions"></div>
-  <small style="color:red" id="dropoffLabel"></small>
+<div class="input-wrapper">
+  <label>Destination : <small style="color:red" id="dropoffLabel"></small></label>
+  <input type="text" id="dropoffSearch" placeholder="Search destination..." autocomplete="off">
+  <div id="dropoffSuggestions" class="suggestion-box"></div>
+  
 </div>
-
+</div>
 
 <input type="hidden" id="distanceInput" readonly>
-<div>
+<div class="row">
+<div class="input-wrapper">
 <label>Start Date & Time</label>
 <input type="datetime-local" id="startTime">
 </div>
 
-<div>
+<div class="input-wrapper">
 <label>End Date & Time</label>
 <input type="datetime-local" id="endTime">
 </div>
 
-<div>
+</div>
+<small id="timeError" style="color: red; display: none;"></small>
+<!-- <div>
 <label>Category</label>
 <select id="category">
   <option value="regular">Regular</option>
   <option value="budget">Budget-Friendly</option>
 </select>
-</div>
+</div> -->
 
 <div>
-<label>Vehicle Type</label>
-<select id="vehicle">
+<!-- <label>Vehicle Type</label> -->
+<select id="vehicle" hidden>
   <option value="l300" selected>L300</option>
-  <option value="jeep">Jeep</option>
-  <option value="van">Van</option>
+  <option value="jeep" disabled>Jeep</option>
+  <option value="van" disabled>Van</option>
 </select>
 </div>
 
-<div id="browserNotice" style="background:#ffecb3; padding:10px; border:1px solid #ccc;">
-  ⚠️ Some features may not work in Messenger.  
-  <a href="https://rental-qoute.vercel.app/" style="color:blue; font-weight:bold;">Tap here to open in your browser</a>
-</div>
 
 
 <input type="hidden" id="totalPrice" readonly>
 
-<button type="button" onclick="resetMap()" id="reset">  🗘 Reset</button>
-<button type="button" id="capture" onclick="handleFinalize()">📸 Finalize & Message Us.</button>
 
-<p id="distance">Distance: 0 km</p>
+<div class="row">
+  <p id="distance">Distance: 0 km</p>
+<p id="durationDisplay">Duration: 0 hours</p>
 <p id="priceDisplay">Price: ₱0.00</p>
 </div>
+<div class="btn-row">
+  <button type="button" onclick="resetMap()" id="reset">  🗘 Reset</button>
+  <button id="messengerBtn">📲 Send to Messenger</button>
+</div>
+
+</div>
+
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="assets/map.js"></script>
+<script type="module" src="assets/js/init.js"></script>
+
 
 
 </body>
