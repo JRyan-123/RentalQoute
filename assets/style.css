@@ -75,13 +75,7 @@
     cursor: pointer; 
     font-size: var(--sz-xs);
 }
-#reset{
-    background: var(--clr-lgtred);
-    color: var(--clr-lgt);
-}
-#reset:hover{
-     background: var(--clr-red);
-}
+
 #messengerBtn{
     background: var(--clr-grn);
     color: var(--clr-lgt);
@@ -132,4 +126,13 @@ input{
 
 .suggestion-item:hover {
   background-color: #f0f0f0;
+}
+h2{
+    display: flex;
+    align-items: center;
+}
+#icon-nobg{
+    margin-right:10px ;
+    width: 30px;
+    height: 30px;
 }

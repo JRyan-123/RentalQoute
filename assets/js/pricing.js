@@ -40,7 +40,7 @@ const diffdays = Math.floor(totalHours / 24);
 const diffhours = totalHours % 24;
 
 document.getElementById("durationDisplay").innerText = 
-  `Duration: ${diffdays} day(s) ${diffhours} hour(s)`;
+  `Duration: ${diffdays} d ${diffhours} h`;
 
   document.getElementById("totalPrice").value = total.toFixed(2);
   document.getElementById("priceDisplay").innerText = `Price: ₱${total.toFixed(2)}`;

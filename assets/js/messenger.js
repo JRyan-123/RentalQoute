@@ -11,7 +11,7 @@ export function copyAndGoToMessenger() {
   const message = `🚐 Van Rental Inquiry:\n\n📍 Pickup: ${pickup}\n📍 Drop-off: ${dropoff}\n🗓️ Start: ${start}\n🗓️ End: ${end}\n🚗 Vehicle: ${vehicle}\n📏 Distance: ${distance} km\n🕗 ${duration}\n💸 Estimated Price: ₱${price}\n\n📋Inclusions:\n✅Driver\n✅Gas\n✅Toll fees\n✅Dual-Aircon\n✅RoundTrip\n\nPlease confirm my booking.`;
 
   navigator.clipboard.writeText(message).then(() => {
-    alert("✅ Details copied! You can now paste in Messenger.");
+    alert("✅ Details copied! You can now PASTE in Messenger.");
     window.open("https://m.me/TriarRental", "_blank");
   }).catch(err => {
     console.error("Copy failed:", err);

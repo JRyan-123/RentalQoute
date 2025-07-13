@@ -21,3 +21,38 @@ map.on("click", async (e) => {
   window[type + "Marker"].setPopupContent(`${type === "pickup" ? "Pickup" : "Drop-off"}: ${name}`).openPopup();
   document.getElementById(type + "Search").value = name;
 });
+
+
+function enableChange(type) {
+  const input = document.getElementById(`${type}Search`);
+  const label = document.getElementById(`${type}Label`);
+
+  input.addEventListener("click", () => {
+    // Remove marker
+    if (window[`${type}Marker`]) {
+      map.removeLayer(window[`${type}Marker`]);
+      window[`${type}Marker`] = null;
+    }
+
+    // Remove route line if needed
+    if (!window.pickupMarker || !window.dropoffMarker) {
+      if (routeLine) {
+        map.removeLayer(routeLine);
+        routeLine = null;
+      }
+    }
+
+    // Clear UI
+    input.value = "";
+    input.disabled = false;
+    if (label) label.innerText = "";
+    document.getElementById("distance").innerText = "Distance: 0 km";
+    document.getElementById("distanceInput").value = "";
+    document.getElementById("priceDisplay").innerText = "Price: ₱0.00";
+
+    // Reset price calculation
+    calculateTotalPrice();
+  });
+}
+enableChange("pickup");
+enableChange("dropoff");
