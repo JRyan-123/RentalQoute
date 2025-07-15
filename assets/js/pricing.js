@@ -54,8 +54,8 @@ export function calculateTotalPrice() {
   const hours = Math.ceil((end - start) / 3600000); // in hours
   const rates = {
     l300: { base: 1000, rate: 500, driver: 500  },
-    jeep: { base: 1000, rate: 2500, driver: 500  },
-    van: { base: 2000, rate: 3500, driver: 500  }
+    jeep: { base: 3000, rate: 500, driver: 750  },
+    van: { base: 4500, rate: 500, driver: 1000  }
   };
 
   const { base, rate, driver} = rates[vehicle] || { base: 0, rate: 0, driver: 0};
