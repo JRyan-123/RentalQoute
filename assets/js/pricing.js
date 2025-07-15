@@ -36,6 +36,16 @@ export function calculateTotalPrice() {
     }
 
     let total = 700 + (km * 30);
+    if (km > 10) {
+      total += Math.ceil(km-10) * 5;
+
+    }
+
+     if (km > 40) {
+      total += Math.ceil(km-40) * 5;
+
+    }
+
 
     document.getElementById("totalPrice").value = total.toFixed(2);
     document.getElementById("totalPriceB").value = " ";
