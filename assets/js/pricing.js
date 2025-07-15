@@ -53,35 +53,41 @@ export function calculateTotalPrice() {
 
   const hours = Math.ceil((end - start) / 3600000); // in hours
   const rates = {
-    l300: { base: 1500, rate: 3000, driver: 500  },
+    l300: { base: 1000, rate: 500, driver: 500  },
     jeep: { base: 1000, rate: 2500, driver: 500  },
     van: { base: 2000, rate: 3500, driver: 500  }
   };
 
-  const { base, rate } = rates[vehicle] || { base: 0, rate: 0 };
-  
-  let total = base;
+  const { base, rate, driver} = rates[vehicle] || { base: 0, rate: 0, driver: 0};
+  let L300, driverFee, kmFee, xFee = 0;
+  let total = base + driver;
   let totalB = base - 500;
   
-  total += 500 * Math.ceil(hours / 8);
+  L300 = base *  Math.max(1, Math.floor(hours / 12));
   totalB += 125 * Math.ceil(hours / 3);
 
-  total +=  1000 * Math.floor(hours/12);
+  driverFee =  driver * Math.ceil( hours/ 11.5);
   totalB +=  500 * Math.floor(hours/6);
 
-  total +=  500 * Math.ceil(km / 25) ;
+  kmFee =  rate * Math.ceil(km / 25) + (Math.round((km % 25) / 40)*100);
   totalB +=  km * 20;
 
-  if (km > 100) {
-    total += 10*(km-100);
+  xFee = (hours % 12) * 100 ;
+
+  if (km > 80) {
+    xFee += Math.ceil(km-80) * 20;
     totalB += 10*(km-100);
   }
-  if (km > 200) {
-    total += 5*(km-200);
+  if (km > 100) {
+    xFee += Math.ceil(km-100) * 10;
     totalB += 5*(km-200);
   }
-
-
+  if (km > 200) {
+    xFee -= Math.ceil(km-100) * 10;
+    totalB += 5*(km-200);
+  }
+  console.log( total+"+"+ L300 +"+"+driverFee  +"+"+  kmFee+"+"+ xFee);
+  total += L300 + driverFee + kmFee + xFee;
   const totalHours = hours;
   const diffdays = Math.floor(totalHours / 24);
   const diffhours = totalHours % 24;
@@ -92,7 +98,7 @@ export function calculateTotalPrice() {
 
   document.getElementById("durationDisplay").innerText =
     `Duration: ${diffdays} d ${diffhours} h`;
-  document.getElementById("totalPrice").value = total.toFixed(2);
+  document.getElementById("totalPrice").value = kmFee.toFixed(2);
   document.getElementById("totalPriceB").value = totalB.toFixed(2);
   document.getElementById("priceDisplay").innerText = `Price: ₱${totalB.toFixed(2)} - ${total.toFixed(2)}`;
 }

@@ -7,10 +7,12 @@ export async function reverseGeocode(lat, lng) {
     const res = await fetch(`https://api.openrouteservice.org/geocode/reverse?api_key=${apiKey}&point.lat=${lat}&point.lon=${lng}&size=1`);
     const data = await res.json();
     return data.features[0]?.properties?.label || "Unknown location";
+
   } catch {
     return "Unknown location";
   }
 }
+
 
 export async function calculateDistance(pickup, dropoff) {
   const coords = [[pickup.lng, pickup.lat], [dropoff.lng, dropoff.lat]];
@@ -27,6 +29,7 @@ export async function calculateDistance(pickup, dropoff) {
   window.routeLine = L.geoJSON(data).addTo(map);
 
   document.getElementById("distanceInput").value = km;
+  
   document.getElementById("distance").innerText = `Distance: ${km} km`;
   calculateTotalPrice();
 }
